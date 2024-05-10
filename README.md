@@ -27,6 +27,10 @@ Have fun :-)
 
 
 ## k8s
+docker build -t registry.mygitlab.ru/root/futureback-minikube/my_jupyterhub .
+docker tag my_jupyterhub registry.mygitlab.ru/root/futureback-minikube/my_jupyterhub
+docker push registry.mygitlab.ru/root/futureback-minikube/my_jupyterhub
+
 kubectl create secret docker-registry myregsecret \
 --docker-server=<your-registry> \
 --docker-username=<your-username> \
