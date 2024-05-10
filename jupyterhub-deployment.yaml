@@ -25,7 +25,7 @@ spec:
           mountPath: /srv/jupyterhub/jupyterhub_config.py
           subPath: jupyterhub_config.py
         - name: jupyterhub-data
-          mountPath: /srv/jupyterhub/data
+          mountPath: /home/jovyan
       volumes:
       - name: docker-sock
         hostPath:
