@@ -1,5 +1,4 @@
-FROM jupyterhub/jupyterhub:latest
-
+FROM registry.mygitlab.ru/root/futureback-minikube/jupyter-hellomodel7_fmyfdpz
 RUN pip install --no-cache \
     oauthenticator \
     dockerspawner \

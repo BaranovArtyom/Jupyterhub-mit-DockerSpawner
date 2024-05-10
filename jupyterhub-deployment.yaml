@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterhub
+  namespace: myjupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+    spec:
+      containers:
+      - name: jupyterhub
+        image: registry.mygitlab.ru/root/futureback-minikube/my_jupyterhub:latest
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+        - name: jupyterhub-config
+          mountPath: /srv/jupyterhub/jupyterhub_config.py
+          subPath: jupyterhub_config.py
+        - name: jupyterhub-data
+          mountPath: /srv/jupyterhub/data
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+      - name: jupyterhub-config
+        configMap:
+          name: jupyterhub-config
+      - name: jupyterhub-data
+        persistentVolumeClaim:
+          claimName: jupyterhub-pvc
+      imagePullSecrets:
+      - name: myregsecret
